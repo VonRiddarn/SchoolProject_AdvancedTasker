@@ -9,7 +9,8 @@ static class CommandHub
 	public static Command[] _commands =
 	{
 		new Command_Add("add"),
-		new Command_Remove("remove")
+		new Command_Remove("remove"),
+		new Command_ShowList("showlist")
 	};
 
 	public static void FindAndExecuteFromArgumentArray(string[] args)
@@ -34,7 +35,7 @@ static class CommandHub
 
 			if (args.Length > 0)
 			{
-				if (args[0].ToLower() == "h" && args[0].ToLower() == "help")
+				if (args[0].ToLower() == "h" || args[0].ToLower() == "help")
 				{
 					_commands[i].ShowHelp();
 					return;

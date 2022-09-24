@@ -37,7 +37,7 @@ class Task
 	{
 		string checkMark = _isDone ? "X" : " ";
 
-		return $"[{checkMark}] | Due in {DaysLeft} days | {_description}";
+		return $"{_indexId}: [{checkMark}] Due in {DaysLeft} days\t| \"{_description}\"";
 	}
 
 	public void SetIsDone(bool isDone) => _isDone = isDone;

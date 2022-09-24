@@ -82,6 +82,7 @@ class Command_Remove : Command
 	public override void ShowHelp()
 	{
 		Console.WriteLine();
+		Console.WriteLine("Removes a task or list.");
 		Console.WriteLine("Usage: remove <list> <task-id>");
 		Console.WriteLine("List: The list you want remove / remove a task from.");
 		Console.WriteLine("Task ID: The task you want to remove.");

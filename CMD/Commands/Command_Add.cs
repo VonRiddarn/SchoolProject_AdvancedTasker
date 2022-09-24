@@ -52,6 +52,7 @@ class Command_Add : Command
 	public override void ShowHelp()
 	{
 		Console.WriteLine();
+		Console.WriteLine("Adds a task to a list.");
 		Console.WriteLine("Usage: add \"description\" <list> <due-in-days>");
 		Console.WriteLine("Description: A task description, such as \"Walk the dog\".");
 		Console.WriteLine("List: The tasklist to save this task in, such as \"work\" or \"home\".");
