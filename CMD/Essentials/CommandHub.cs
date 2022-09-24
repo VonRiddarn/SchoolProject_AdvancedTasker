@@ -10,7 +10,8 @@ static class CommandHub
 	{
 		new Command_Add("add"),
 		new Command_Remove("remove"),
-		new Command_ShowList("showlist")
+		new Command_ShowList("showlist"),
+		new Command_Check("check")
 	};
 
 	public static void FindAndExecuteFromArgumentArray(string[] args)
