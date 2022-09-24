@@ -47,7 +47,6 @@ class TaskContainer
 		}
 		catch
 		{
-			Console.Write("AdvancedTasker: ");
 			container = new TaskContainer(fileName);
 			
 			if (createFileOnError)

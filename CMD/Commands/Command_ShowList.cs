@@ -24,22 +24,22 @@ class Command_ShowList : Command
 		// /// //
 
 		string fileName = args[0].ToLower();
-		
+
 		TaskContainer container = TaskContainer.GetContainerFromFilename(fileName, false);
-		
-		if(container.Tasks.Count <= 0)
+
+		if (container.Tasks.Count <= 0)
 		{
 			Console.Write("AdvancedTasker: ");
 			Console.WriteLine($"There are no tasks in the list {fileName}.");
 			return;
 		}
-		
+
 		Console.WriteLine($"Listing tasks from \"{fileName}\"");
-		for(int i = 0; i < container.Tasks.Count; i++)
+		for (int i = 0; i < container.Tasks.Count; i++)
 		{
 			Console.WriteLine(container.Tasks[i].GetFormatedString());
 		}
-		
+
 	}
 
 	public override void ShowHelp()
