@@ -1,0 +1,10 @@
+{
+  "Name": "list2",
+  "Tasks": [
+    {
+      "Description": "hejsan",
+      "Filter": "list2",
+      "IsDone": false
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "Name": "list",
+  "Tasks": [
+    {
+      "Description": "sometask",
+      "Filter": "list",
+      "IsDone": false
+    }
+  ]
+}
