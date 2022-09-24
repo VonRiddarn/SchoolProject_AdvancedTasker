@@ -36,7 +36,7 @@ class TaskContainer
 
 
 	// Static utilities
-	public static TaskContainer GetContainerFromFilename(string fileName)
+	public static TaskContainer GetContainerFromFilename(string fileName, bool createFileOnError = true)
 	{
 		TaskContainer? container = null;
 
@@ -48,9 +48,13 @@ class TaskContainer
 		catch
 		{
 			Console.Write("AdvancedTasker: ");
-			Console.WriteLine($"Could not cretae object from file {fileName}.json creating file...");
-			File.Create($"UserLists/{fileName}.json").Close(); // Must put close after so that File.WriteAllText can use the stream.
 			container = new TaskContainer(fileName);
+			
+			if (createFileOnError)
+			{
+				Console.WriteLine($"Could not cretae object from file {fileName}.json creating file...");
+				File.Create($"UserLists/{fileName}.json").Close(); // Must put close after so that File.WriteAllText can use the stream.
+			}
 		}
 
 		return container!;
