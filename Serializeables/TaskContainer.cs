@@ -36,7 +36,7 @@ class TaskContainer
 
 
 	// Static utilities
-	public static TaskContainer GetContainerFromFilename(string fileName, bool createFileOnError = true)
+	public static TaskContainer GetContainerFromFilename(string fileName, bool createFileOnError)
 	{
 		TaskContainer? container = null;
 

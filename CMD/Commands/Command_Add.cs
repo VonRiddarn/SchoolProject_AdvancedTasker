@@ -39,7 +39,7 @@ class Command_Add : Command
 		}
 		
 		// Get the container we want to add files to.
-		TaskContainer container = TaskContainer.GetContainerFromFilename(fileName);
+		TaskContainer container = TaskContainer.GetContainerFromFilename(fileName, true);
 		
 		// Create a new task utilizing the arguments passed from the end user in their parsed form.
 		Task newTask = new Task(container.Tasks.Count, args[0], dueInDays);
