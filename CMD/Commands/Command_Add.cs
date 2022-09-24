@@ -15,45 +15,46 @@ class Command_Add : Command
 		// Early return pattern
 		if (args.Length != 3)
 		{
+			Console.WriteLine();
 			Console.Write("AdvancedTasker: ");
-			Console.WriteLine("The command 'add' only takes 4 arguments. Type '<command> h' or '<command> help' for more info.");
+			Console.WriteLine("The command 'add' only takes 4 arguments.");
+			Console.WriteLine("Type '<command> h' or '<command> help' for more info.");
+			Console.WriteLine();
 			return;
 		}
-
-		// Execute starts here
+		// /// //
+		
 		string fileName = args[1].ToLower();
-		TaskContainer container = null;
+		int dueInDays = 0;
 		
-				
-		try
+		try // Make sure args[2] is of type int
 		{
-			string containerJson = File.ReadAllText($"UserLists/{fileName}.json");
-			container = JsonSerializer.Deserialize<TaskContainer>(containerJson);
+			dueInDays = int.Parse(args[2]);
 		}
-		catch
+		catch // Else abort
 		{
-			Console.WriteLine("No json object was found. Creating new object...");
-			container = new TaskContainer(fileName);
-		}
-		
-		try
-		{
-			container.AddTask(new Task(args[0], args[1], int.Parse(args[2])));
-			File.WriteAllText($"UserLists/{fileName}.json", container.SerializeObject());
-		}
-		catch
-		{
-			Console.WriteLine("ERROR: Something went wrong writing to file. Check your input and try again.");
+			Console.Write("AdvancedTasker: ");
+			Console.WriteLine($"{args[2]} is not a whole number. Cannot add task.");
 			return;
 		}
+		
+		// Get the container we want to add files to.
+		TaskContainer container = TaskContainer.GetContainerFromFilename(fileName);
+		
+		// Create a new task utilizing the arguments passed from the end user in their parsed form.
+		Task newTask = new Task(container.Tasks.Count, args[0], dueInDays);
+		
+		// Add the new task and overwrite the container json file.
+		container.AddTask(newTask);
+		container.SaveAsJson(fileName);
 	}
 
 	public override void ShowHelp()
 	{
 		Console.WriteLine();
-		Console.WriteLine("Usage: add \"<description>\" <list> <due-in-days>");
-		Console.WriteLine("Description: A task description, such as 'Walk the dog'.");
-		Console.WriteLine("List: The tasklist to save this task in, such as 'work' or 'home'.");
+		Console.WriteLine("Usage: add \"description\" <list> <due-in-days>");
+		Console.WriteLine("Description: A task description, such as \"Walk the dog\".");
+		Console.WriteLine("List: The tasklist to save this task in, such as \"work\" or \"home\".");
 		Console.WriteLine("Due in days: How many days from now the task is due.");
 		Console.WriteLine();
 	}

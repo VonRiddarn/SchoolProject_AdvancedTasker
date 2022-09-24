@@ -10,4 +10,5 @@ abstract class Command
 	public abstract void ShowHelp();
 	
 	public Command(string accessor) => _accessor = accessor;
+	
 }

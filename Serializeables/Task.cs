@@ -1,43 +1,46 @@
 using System;
+using System.Text.Json.Serialization;
 
 namespace VonRiddarn.School.AdvancedTasker;
 class Task
 {
-	/*Guid _id = Guid.Empty;
-	public Guid ID { get { return _id; } }*/
+	int _indexId = 0;
+	public int IndexId { get { return _indexId; } set { _indexId = value; } }
 	
 	string _description = "Task";
-	public string Description { get { return _description; } set {_description = value; }}
-
-	string _filter = string.Empty;
-	public string Filter { get { return _filter; } set {_filter = value; }}
+	public string Description { get { return _description; } set { _description = value; } }
 
 	bool _isDone = false;
-	public bool IsDone { get { return _isDone; } set {_isDone = value; }}
+	public bool IsDone { get { return _isDone; } set { _isDone = value; } }
 
 	DateTime _creationDate = DateTime.Now;
-	DateTime _dueDate = DateTime.Now;
+	public DateTime CreationDate { get { return _creationDate; } set { _creationDate = value; } }
 
-	public Task() {}
-	
-	public Task(string description, string filter, int dueInDays)
+	DateTime _dueDate = DateTime.Now;
+	public DateTime DueDate { get { return _dueDate; } set { _dueDate = value; } }
+
+	[JsonIgnore]
+	public int DaysLeft => (_dueDate.Date - DateTime.Now.Date).Days;
+
+	// Pesky empty constructor for the json deserializer
+	public Task() { }
+
+	public Task(int indexId, string description, int dueInDays)
 	{
+		_indexId = indexId;
 		_description = description;
-		_filter = filter;
 		_creationDate = DateTime.Now;
 		_dueDate = _creationDate.AddDays(dueInDays);
-		//_id = Guid.NewGuid();
 	}
 
 	public string GetFormatedString()
 	{
 		string checkMark = _isDone ? "X" : " ";
-		int daysLeft = (_dueDate.Date - DateTime.Now.Date).Days;
 
-		return $"[{checkMark}] | {_filter} | Due in {daysLeft} days | {_description}";
+		return $"[{checkMark}] | Due in {DaysLeft} days | {_description}";
 	}
 
 	public void SetIsDone(bool isDone) => _isDone = isDone;
 	public void ToggleIsDone() => _isDone = !_isDone;
-	
+
 }

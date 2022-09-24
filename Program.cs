@@ -7,9 +7,9 @@ internal class Program
 {
 	private static void Main(string[] args)
 	{
-		// Use the run command : "dotnet run add something list 0"
-		// You could technically run the command in other ways as well, the important thing is that the 3rd argument is the same each time
-		
+		// Run the arguments throguh the commandhub and look for a matching command.
+		// All the commands are stored under: CMD/Commands
+		// The root command class is stored under: CMD/Essentials/Command.cs
 		CommandHub.FindAndExecuteFromArgumentArray(args);
 	}
 }
