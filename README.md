@@ -1,6 +1,8 @@
 # Advanced Tasker
 
-Store, add and remove tasks in json files accessible through the built in commands.
+Store, add and remove tasks in json files accessible through the built in commands.<br/>
+This readme was made at 3am.<br/>
+I know it ain't pretty.<br/>
 
 ## Commands
 
@@ -29,8 +31,3 @@ remove 'list'<br/>
 **All commands have a helper text:**<br/>
 Access it by adding "h" or "help" to the end of a command.<br/>
 *EG: remove h*<br/>
-
-## About this readme
-
-It was made at 3am.<br/>
-I know it ain't pretty.<br/>
