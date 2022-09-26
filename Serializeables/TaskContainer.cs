@@ -14,25 +14,10 @@ class TaskContainer
 
 	public TaskContainer(string name) => _name = name;
 
-	public string SerializeObject() => JsonSerializer.Serialize(this, new JsonSerializerOptions { WriteIndented = true });
+	///<summary>The JSON string representation of this object</summary>
+	public string Serialized() => JsonSerializer.Serialize(this, new JsonSerializerOptions { WriteIndented = true });
 
 	public void AddTask(Task task) => Tasks.Add(task);
-
-	public void SaveAsJson(string fileName)
-	{
-		try
-		{
-			File.WriteAllText($"UserLists/{fileName}.json", SerializeObject());
-			Console.Write("AdvancedTasker: ");
-			Console.WriteLine($"{fileName}.json saved successfully.");
-		}
-		catch
-		{
-			Console.Write("AdvancedTasker: ");
-			Console.WriteLine("Something went wrong writing to file. Check your input and try again.");
-			return;
-		}
-	}
 
 
 	// Static utilities
@@ -48,7 +33,7 @@ class TaskContainer
 		catch
 		{
 			container = new TaskContainer(fileName);
-			
+
 			if (createFileOnError)
 			{
 				Console.WriteLine($"Could not cretae object from file {fileName}.json creating file...");
@@ -57,7 +42,6 @@ class TaskContainer
 		}
 
 		return container!;
-
 	}
 
 }

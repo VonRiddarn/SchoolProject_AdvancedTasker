@@ -6,34 +6,16 @@ using System.Text.Json;
 namespace VonRiddarn.School.AdvancedTasker.Commands;
 class Command_Check : Command
 {
-	
+
 	// Task, List, Filter, DueDays
 	protected override void Execute(string[] args)
 	{
-		// Early return pattern
-		if (args.Length != 2)
-		{
-			Console.WriteLine();
-			Console.Write("AdvancedTasker: ");
-			Console.WriteLine("The command 'check' only takes 2 arguments.");
-			Console.WriteLine("Type '<command> h' or '<command> help' for more info.");
-			Console.WriteLine();
-			return;
-		}
-		// /// //
-
 		string fileName = args[0].ToLower();
 		int taskId = 0;
 
-		TaskContainer container = TaskContainer.GetContainerFromFilename(fileName, false);
-
-		if (container.Tasks.Count <= 0)
-		{
-			Console.Write("AdvancedTasker: ");
-			Console.WriteLine($"There are no tasks in the list {fileName}.");
+		if (TryEarlyReturn(args.Length))
 			return;
-		}
-		
+
 		try // Make sure args[1] is of type int
 		{
 			taskId = int.Parse(args[1]);
@@ -45,18 +27,8 @@ class Command_Check : Command
 			return;
 		}
 		
-		try
-		{
-			container.Tasks[taskId].ToggleIsDone();
-		}
-		catch
-		{
-			Console.Write("AdvancedTasker: ");
-			Console.WriteLine($"{taskId} is not a valid task index.");
-			return;
-		}
 		
-		container.SaveAsJson(fileName);
+		TaskManager.ToggleTask(fileName, taskId);
 	}
 
 	protected override void ShowHelp()
@@ -68,4 +40,23 @@ class Command_Check : Command
 		Console.WriteLine("Task ID: The task ID you want to toggle.");
 		Console.WriteLine();
 	}
+
+
+	// Custom methods
+
+	bool TryEarlyReturn(int argsCount)
+	{
+		if (argsCount != 2)
+		{
+			Console.WriteLine();
+			Console.Write("AdvancedTasker: ");
+			Console.WriteLine("The command 'check' only takes 2 arguments.");
+			Console.WriteLine("Type '<command> h' or '<command> help' for more info.");
+			Console.WriteLine();
+			return true;
+		}
+
+		return false;
+	}
+
 }
