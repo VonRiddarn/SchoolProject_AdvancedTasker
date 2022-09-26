@@ -1,37 +1,37 @@
 ﻿using System;
-using VonRiddarn.School.AdvancedTasker.CMD;
-using VonRiddarn.School.AdvancedTasker;
+using VonRiddarn.School.AdvancedTasker.Commands;
+using System.Linq;
 
 internal class Program
 {
 	private static void Main(string[] args)
 	{
-		// Run the arguments throguh the commandhub and look for a matching command.
-		// All the commands are stored under: CMD/Commands
-		// The root command class is stored under: CMD/Essentials/Command.cs
-		CommandHub.FindAndExecuteFromArgumentArray(args);
+		FindAndRunCommand(args);
+	}
+	
+	
+	///<summary>Matches args[0] with a command type and calls the template method RunCommand for that command.</summary>
+	///<remarks>args[0] is skipped and the rest of the array is sent through as args for the Execute method.</remarks>
+	static void FindAndRunCommand(string[] args)
+	{
+		// Take the first end-user argument args[0] and turn it into
+		// The full path of the command we want to execute. Finally saved as "typeName"
+		string nameSpace = "VonRiddarn.School.AdvancedTasker.Commands.";
+		string prefix = "Command_";
+		string typeName = nameSpace + prefix + args[0];
+
+		// Get the Type from path. This is a case insensitive search
+		Type? type = Type.GetType(typeName, false, true);
+
+		if (type == null)
+		{
+			Console.WriteLine("Command not found!");
+			return;
+		}
+		
+		// This code is only reachable if "type" is NOT null
+		Command myObject = (Command)Activator.CreateInstance(type)!;
+
+		myObject?.RunCommand(args.Skip(1).ToArray());
 	}
 }
-
-/*Self-Reflections:
-
-I believe the core system for commands is quite alright. 
-It's expandable to infinity and doesn't require too much boiler code per new command.
-
-Although I am proud of the utility "TaskContainer.GetContainerFromFilename" I still believe
-that I could've found a more elegant solution for fetching and editing json objects.
-
-The program has parts of recurring try-catch code that probably could be 
-moved into some utility class or method instead, but I am unsure as of how to proceed.
-
-All in all:
-
-The project itself wasn't a hard task, the hard task was to make it expandable and somewhat abstract.
-I believe I did a well enough job on expandability, but as far as abstraction goes I could do much better
-as I am currently showing way too much data to exterior classes. 
-Although all data is private or protected and showing only through properties
-so it's not a fatal error, just an annoying one.
-
-I expect to be fully done with the project 2022-09-26.
-
-*/

@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 
-namespace VonRiddarn.School.AdvancedTasker.CMD;
+namespace VonRiddarn.School.AdvancedTasker.Commands;
 class Command_Check : Command
 {
-	public Command_Check(string accessor) : base(accessor) { }
-
+	
 	// Task, List, Filter, DueDays
-	public override void Execute(string[] args)
+	protected override void Execute(string[] args)
 	{
 		// Early return pattern
 		if (args.Length != 2)
@@ -60,7 +59,7 @@ class Command_Check : Command
 		container.SaveAsJson(fileName);
 	}
 
-	public override void ShowHelp()
+	protected override void ShowHelp()
 	{
 		Console.WriteLine();
 		Console.WriteLine("Toggles completion of a task in a list.");

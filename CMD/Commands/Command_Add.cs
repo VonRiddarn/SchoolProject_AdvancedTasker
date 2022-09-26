@@ -3,15 +3,14 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 
-namespace VonRiddarn.School.AdvancedTasker.CMD;
+namespace VonRiddarn.School.AdvancedTasker.Commands;
 class Command_Add : Command
 {
-	public Command_Add(string accessor) : base(accessor) { }
-
-
+	
 	// Task, List, Filter, DueDays
-	public override void Execute(string[] args)
+	protected override void Execute(string[] args)
 	{
+		
 		// Early return pattern
 		if (args.Length != 3)
 		{
@@ -49,7 +48,7 @@ class Command_Add : Command
 		container.SaveAsJson(fileName);
 	}
 
-	public override void ShowHelp()
+	protected override void ShowHelp()
 	{
 		Console.WriteLine();
 		Console.WriteLine("Adds a task to a list.");

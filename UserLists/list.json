@@ -45,10 +45,10 @@
     },
     {
       "IndexId": 6,
-      "Description": "Lek med Simon",
+      "Description": "Do something",
       "IsDone": false,
-      "CreationDate": "2022-09-25T01:33:39.8037211+02:00",
-      "DueDate": "2022-09-25T01:33:39.8037211+02:00"
+      "CreationDate": "2022-09-26T11:36:13.637744+02:00",
+      "DueDate": "2022-10-01T11:36:13.637744+02:00"
     }
   ]
 }
