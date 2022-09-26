@@ -10,7 +10,6 @@ abstract class Command
 
 	public void RunCommand(string[] args)
 	{
-		Console.WriteLine("TYOTOTOTOOT");
 		if (args.Length > 0)
 		{
 			if (args[0] == "h" || args[0] == "help")
