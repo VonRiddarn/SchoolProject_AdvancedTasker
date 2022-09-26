@@ -33,7 +33,7 @@ class Command_ShowList : Command
 	
 	void ShowLists()
 	{
-		string[] lists = TaskManager.GetAllUserLists();
+		string[] lists = TaskManager.GetAllUserListNames();
 		
 		foreach(string listName in lists)
 		{

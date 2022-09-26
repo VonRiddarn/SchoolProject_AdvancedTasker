@@ -6,7 +6,7 @@ using VonRiddarn.School.AdvancedTasker;
 static class TaskManager
 {
 
-	public static string[] GetAllUserLists()
+	public static string[] GetAllUserListNames()
 	{
 		try
 		{
