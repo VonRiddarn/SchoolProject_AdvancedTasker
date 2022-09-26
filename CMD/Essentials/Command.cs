@@ -8,6 +8,8 @@ abstract class Command
 	// Using the template method pattern to ensure we call Execute and ShowHelp correctly.
 	// Source: https://en.wikipedia.org/wiki/Template_method_pattern
 
+	///<summary>Template method making an argument check and calling Execute or ShowHelp
+	/// depending on the end-users intentions.</summary>
 	public void RunCommand(string[] args)
 	{
 		if (args.Length > 0)
