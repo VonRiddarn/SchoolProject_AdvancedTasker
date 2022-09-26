@@ -6,6 +6,12 @@ internal class Program
 {
 	private static void Main(string[] args)
 	{
+		if(args.Length <= 0)
+		{
+			Console.WriteLine("AdvancedTasker: You must issue a command.\nUse command \"help\" for a list of all avalible commands.");
+			Environment.Exit(0);	
+		}
+		
 		FindAndRunCommand(args);
 	}
 	
@@ -25,7 +31,7 @@ internal class Program
 
 		if (type == null)
 		{
-			Console.WriteLine("Command not found!");
+			Console.WriteLine("Command not found!\nUse command \"help\" for a list of avalible commands.");
 			return;
 		}
 		

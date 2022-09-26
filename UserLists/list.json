@@ -49,6 +49,13 @@
       "IsDone": false,
       "CreationDate": "2022-09-26T11:36:13.637744+02:00",
       "DueDate": "2022-10-01T11:36:13.637744+02:00"
+    },
+    {
+      "IndexId": 7,
+      "Description": "Some task that should be done",
+      "IsDone": false,
+      "CreationDate": "2022-09-26T19:05:43.6690411+02:00",
+      "DueDate": "2022-09-27T19:05:43.6690411+02:00"
     }
   ]
 }
