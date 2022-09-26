@@ -5,6 +5,28 @@ using VonRiddarn.School.AdvancedTasker;
 
 static class TaskManager
 {
+
+	public static string[] GetAllUserLists()
+	{
+		try
+		{
+			return Directory.GetFiles("UserLists/");
+		}
+		catch
+		{
+			return new string[0];
+		}
+	}
+
+	public static Task[] GetAllTasksFromFile(string fileName)
+	{
+		fileName = fileName.ToLower();
+
+		TaskContainer container = TaskContainer.GetContainerFromFilename(fileName, false);
+		
+		return container.Tasks.ToArray();
+	}
+
 	public static void AddTask(string taskName, string fileName, int dueInDays)
 	{
 		fileName = fileName.ToLower();
@@ -65,7 +87,7 @@ static class TaskManager
 	public static void ToggleTask(string fileName, int taskId)
 	{
 		fileName = fileName.ToLower();
-		
+
 		TaskContainer container = TaskContainer.GetContainerFromFilename(fileName, false);
 
 
@@ -86,7 +108,7 @@ static class TaskManager
 			//Console.WriteLine($"{taskId} is not a valid task index.");
 			return;
 		}
-		
+
 		SaveAsJson(fileName, container.Serialized());
 	}
 

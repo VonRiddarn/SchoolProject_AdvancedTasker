@@ -10,34 +10,13 @@ class Command_ShowList : Command
 	// Task, List, Filter, DueDays
 	protected override void Execute(string[] args)
 	{
-		// Early return pattern
-		if (args.Length != 1)
-		{
-			Console.WriteLine();
-			Console.Write("AdvancedTasker: ");
-			Console.WriteLine("The command 'showlist' only takes 1 argument.");
-			Console.WriteLine("Type '<command> h' or '<command> help' for more info.");
-			Console.WriteLine();
-			return;
-		}
-		// /// //
-
-		string fileName = args[0].ToLower();
-
-		TaskContainer container = TaskContainer.GetContainerFromFilename(fileName, false);
-
-		if (container.Tasks.Count <= 0)
-		{
-			Console.Write("AdvancedTasker: ");
-			Console.WriteLine($"There are no tasks in the list {fileName}.");
-			return;
-		}
-
-		Console.WriteLine($"Listing tasks from \"{fileName}\"");
-		for (int i = 0; i < container.Tasks.Count; i++)
-		{
-			Console.WriteLine(container.Tasks[i].GetFormatedString());
-		}
+		if(args.Length == 0)
+			ShowLists();
+		else if(args.Length == 1)
+			ShowTasksInList(args);
+		else
+			Console.WriteLine("Error: showlist only takes 0 or 1 argument.");
+			
 
 	}
 
@@ -49,4 +28,42 @@ class Command_ShowList : Command
 		Console.WriteLine("List: The list you want to show.");
 		Console.WriteLine();
 	}
+	
+	// Custom methods
+	
+	void ShowLists()
+	{
+		string[] lists = TaskManager.GetAllUserLists();
+		
+		foreach(string listName in lists)
+		{
+			// Trim away "UserLists/" and ".json" from file name.
+			string newName = listName;
+			int splitPoint = newName.IndexOf('/')+1;
+			newName = newName.Substring(splitPoint);
+			splitPoint = newName.IndexOf('.');
+			newName = newName.Remove(splitPoint);
+			
+			Console.WriteLine(newName);
+		}
+	}
+	
+	void ShowTasksInList(string[] args)
+	{
+		Task[] tasks = TaskManager.GetAllTasksFromFile(args[0]);
+		
+		if(tasks.Length <= 0)
+		{
+			Console.Write("AdvancedTasker: ");
+			Console.WriteLine($"No list of name {args[0]} found.");
+			return;
+		}
+		
+		for(int i = 0; i < tasks.Length; i++)
+		{
+			Console.WriteLine(tasks[i].GetFormatedString());
+		}
+		
+	}
+	
 }
