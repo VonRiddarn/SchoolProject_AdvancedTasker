@@ -38,6 +38,6 @@ internal class Program
 		// This code is only reachable if "type" is NOT null
 		Command myObject = (Command)Activator.CreateInstance(type)!;
 
-		myObject?.RunCommand(args.Skip(1).ToArray());
+		myObject?.RunCommand(args[1..]);
 	}
 }
